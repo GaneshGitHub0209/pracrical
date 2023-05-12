@@ -1,0 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <%-- Retrieve the submitted username and password --%>
+    <%
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+    %>
+    <%-- Validate the username and password --%>
+    <c:choose>
+        <%-- Check if the username and password are valid --%>
+        <c:when test="${username == 'admin' && password == 'admin123'}">
+            <%-- Redirect to the home page or perform further actions --%>
+            <jsp:forward page="home.jsp"/>
+        </c:when>
+        <%-- Display an error message if the username or password is incorrect --%>
+        <c:otherwise>
+            <%-- Set the error message and redirect back to the login page --%>
+            <c:set var="errorMessage" value="Invalid username or password."/>
+            <jsp:forward page="login.jsp"/>
+        </c:otherwise>
+    </c:choose>
+</body>
+</html>
